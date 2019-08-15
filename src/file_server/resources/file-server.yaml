@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Ballerina HTTP File Server
+  description: 'A simple HTTP file server written using Ballerina.'
+  contact:
+    email: pubudu.fernando@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:9090/files/v1
+paths:
+  /list:
+    get:
+      tags:
+      - files
+      summary: List all the files
+      operationId: listFiles
+      responses:
+        200:
+          description: A JSON array with
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/File' 
+  # /pet/findByStatus:
+  #   get:
+  #     tags:
+  #     - pet
+  #     summary: Finds Pets by status
+  #     description: Multiple status values can be provided with comma separated strings
+  #     operationId: findPetsByStatus
+  #     parameters:
+  #     - name: status
+  #       in: query
+  #       description: Status values that need to be considered for filter
+  #       required: true
+  #       style: form
+  #       explode: true
+  #       schema:
+  #         type: array
+  #         items:
+  #           type: string
+  #           default: available
+  #           enum:
+  #           - available
+  #           - pending
+  #           - sold
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #         content:
+  #           application/xml:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/Pet'
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/Pet'
+  #       400:
+  #         description: Invalid status value
+  #         content: {}
+  #     security:
+  #     - petstore_auth:
+  #       - write:pets
+  #       - read:pets
+  # /user/{username}:
+  #   get:
+  #     tags:
+  #     - user
+  #     summary: Get user by user name
+  #     operationId: getUserByName
+  #     parameters:
+  #     - name: username
+  #       in: path
+  #       description: 'The name that needs to be fetched. Use user1 for testing. '
+  #       required: true
+  #       schema:
+  #         type: string
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #         content:
+  #           application/xml:
+  #             schema:
+  #               $ref: '#/components/schemas/User'
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/User'
+  #       400:
+  #         description: Invalid username supplied
+  #         content: {}
+  #       404:
+  #         description: User not found
+  #         content: {}
+  #   put:
+  #     tags:
+  #     - user
+  #     summary: Updated user
+  #     description: This can only be done by the logged in user.
+  #     operationId: updateUser
+  #     parameters:
+  #     - name: username
+  #       in: path
+  #       description: name that need to be updated
+  #       required: true
+  #       schema:
+  #         type: string
+  #     requestBody:
+  #       description: Updated user object
+  #       content:
+  #         '*/*':
+  #           schema:
+  #             $ref: '#/components/schemas/User'
+  #       required: true
+  #     responses:
+  #       400:
+  #         description: Invalid user supplied
+  #         content: {}
+  #       404:
+  #         description: User not found
+  #         content: {}
+  #   delete:
+  #     tags:
+  #     - user
+  #     summary: Delete user
+  #     description: This can only be done by the logged in user.
+  #     operationId: deleteUser
+  #     parameters:
+  #     - name: username
+  #       in: path
+  #       description: The name that needs to be deleted
+  #       required: true
+  #       schema:
+  #         type: string
+  #     responses:
+  #       400:
+  #         description: Invalid username supplied
+  #         content: {}
+  #       404:
+  #         description: User not found
+  #         content: {}
+components:
+  schemas:
+    File:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+    

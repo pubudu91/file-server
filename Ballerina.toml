@@ -1,0 +1,5 @@
+[project]
+org-name= "pubudu"
+version= "0.1.0"
+
+[dependencies]
