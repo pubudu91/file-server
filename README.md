@@ -2,7 +2,7 @@
 This is a sample file server written in Ballerina. The server can be run to serve files in a specified directory. 
 
 ## Running the server
-The program takes the directory to serve as an argument. This can be provided either through a config file, an environment variable or as a CLI param.
+The program takes the directory to serve as an argument. This can be provided either through a config file, an environment variable or as a CLI param. If the directory is not specified, it will serve the current directory.
 ```
 $ ballerina run -e root.dir=dir/to/be/served file_server
 ```
