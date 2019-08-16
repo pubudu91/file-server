@@ -11,7 +11,8 @@ listener http:Listener ep0 = new(9090, config = {host: "localhost"});
 string rootDir = config:getAsString("\"root.dir\"", ".");
 
 @openapi:ServiceInfo {
-    contract: "./resources/file-server.yaml"
+    // Replace this with the absolute path. Due to https://github.com/ballerina-platform/ballerina-lang/issues/17834
+    contract: "./resources/file-server.yaml" 
 }
 @http:ServiceConfig {
     basePath: "/files/v1"
