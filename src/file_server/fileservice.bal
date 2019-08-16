@@ -12,7 +12,7 @@ string rootDir = config:getAsString("\"root.dir\"", ".");
 
 @openapi:ServiceInfo {
     // Replace this with the absolute path. Due to https://github.com/ballerina-platform/ballerina-lang/issues/17834
-    contract: "./resources/file-server.yaml" 
+    contract: "/home/pubudu/testing/ballerina/1.0/beta-test/file-server/src/file_server/resources/file-server.yaml" 
 }
 @http:ServiceConfig {
     basePath: "/files/v1"
@@ -51,8 +51,19 @@ service fileService on ep0 {
                 log:printError("failed to respond", result);
             }
         } else {
-            var result = caller->respond(<@untainted>byteChannel.reason());
-            log:printError("failed to respond", byteChannel);
+            log:printError("failed to open file", byteChannel);
+
+            http:Response fileNotFound = new;
+            fileNotFound.statusCode = http:STATUS_NOT_FOUND;
+            json errMsg = {"message":"File not found", "filename":<@untainted>filename};
+            fileNotFound.setPayload(errMsg);
+            
+            var result = caller->respond(fileNotFound);
+            
+
+            if (result is error) {
+                log:printError("failed to respond", result);
+            }
         }
     }
 }
